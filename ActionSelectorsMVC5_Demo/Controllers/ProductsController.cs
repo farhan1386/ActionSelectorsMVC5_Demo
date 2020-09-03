@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using ActionSelectorsMVC5_Demo.Data;
+using ActionSelectorsMVC5_Demo.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using ActionSelectorsMVC5_Demo.Data;
-using ActionSelectorsMVC5_Demo.Models;
 
 namespace ActionSelectorsMVC5_Demo.Controllers
 {
@@ -15,14 +11,12 @@ namespace ActionSelectorsMVC5_Demo.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Products
         public ActionResult Index()
         {
             var products = db.Products.Include(p => p.Category);
             return View(products.ToList());
         }
 
-        // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,19 +31,15 @@ namespace ActionSelectorsMVC5_Demo.Controllers
             return View(product);
         }
 
-        // GET: Products/Create
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "CategoryName");
             return View();
         }
 
-        // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Price,CategoryId")] Product product)
+        public ActionResult Create(Product product)
         {
             if (ModelState.IsValid)
             {
