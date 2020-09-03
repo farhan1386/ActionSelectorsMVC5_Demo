@@ -38,9 +38,10 @@ The ActionVerbs selector is to handle different type of Http requests. The MVC f
 
 All public methods of a controller class are treated as the action method if you want to prevent this default method then you have to assign the public method with NonActionAttribute. 
 
+```
 [NonAction]
 public string Greeting()
 {
     return "<h2>Welcome to MVC 5</h2>";
 }
-
+```
