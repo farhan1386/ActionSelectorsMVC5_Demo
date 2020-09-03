@@ -17,5 +17,11 @@ namespace ActionSelectorsMVC5_Demo.Controllers
             var products = db.Products.ToList();
             return View(products);
         }
+
+        [NonAction]
+        public string Greeting()
+        {
+            return "<h2>Welcome to MVC 5</h2>";
+        }
     }
 }
